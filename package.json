@@ -1,0 +1,16 @@
+{
+  "name": "wandbbot",
+  "version": "1.0.0",
+  "description": "A Weights and Biases bot for discord.",
+  "main": "discordBot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node discordBot.js"
+  },
+  "author": "brihoumb && Alzate_J",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.3.1",
+    "fs": "0.0.1-security"
+  }
+}
