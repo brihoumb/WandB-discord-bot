@@ -59,6 +59,7 @@ const wand_login = (message) => {
             };
         });
     };
+    console.log(`API: ${API}`);
     exec(`wandb login ${API}`, (err, stdout) => {
         if (err) {
             console.error(err);
