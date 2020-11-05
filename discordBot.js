@@ -3,7 +3,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const { exec } = require('child_process');
-let { prefix, token, entity, project, runID } = require('./config.json');
+let { prefix, token, entity, project, runID, API } = require('./config.json');
 
 
 client.login(token);
@@ -30,10 +30,42 @@ client.on('message', message => {
 
 const print_usage = (message) => {
     message.channel.send("```md\n#COMMANDS :\n\n'!help' : Print this Usage.\n"
+    + "'!wand login' : login to wandb with you API.\n"
     + "'!wand init' : Initialise your WandBBbot.\n"
     + "'!wand project list' : List all run of a project.\n"
     + "'!wand run info' : Giving you information about last epoch of a run.\n"
     + "'!wand uninstall' : Uninstall your WandBBbot.```");
+    return;
+};
+
+const wand_login = (message) => {
+    const args = message.content.substring(prefix.length + "login ".length).split(' ');
+    if (args[0] !== '' && args[0] !== undefined) {
+        key = args[0];
+        const config = {
+            "token": token,
+            "prefix": prefix,
+            "API": key,
+            "entity": entity,
+            "project": project,
+            "runID": runID
+        };
+        fs.writeFile('config.json', JSON.stringify(config, null, 2), (err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("JSON data is saved.");
+            };
+        });
+    };
+    exec(`wandb login ${API}`, (err, stdout) => {
+        if (err) {
+            console.error(err);
+            message.channel.send('An error has occurred.');
+        } else {
+            message.channel.send(stdout);
+        };
+    });
     return;
 };
 
@@ -45,9 +77,10 @@ const wand_init = (message) => {
         const config = {
             "token": token,
             "prefix": prefix,
+            "API": API,
             "entity": entity,
             "project": project,
-            "runID": runID
+            "runID": runID,
         };
         fs.writeFile('config.json', JSON.stringify(config, null, 2), (err) => {
             if (err) {
@@ -87,6 +120,7 @@ const wand_run_info = (message) => {
         const config = {
             "token": token,
             "prefix": prefix,
+            "API": API,
             "entity": entity,
             "project": project,
             "runID": runID

@@ -11,6 +11,7 @@ Edit the `config.json` file like following:
 {
   "token": "Your discord bot token",
   "prefix": "Prefix to use the bot (default to '!wand ')",
+  "API": "Your wandb api (can be set with !wand login)",
   "entity": "Your wandb entity name (can be set with !wand init)",
   "project": "Your wandb targeted project (can be set with !wand init)",
   "runID": "Your wandb run ID (can be set with !wand run info)"
@@ -20,6 +21,13 @@ Install `python3.6` or higher and the `requirement.txt`.
 Then run `npm start` to start the bot.
 
 ## List of commands: ##
+``!wand login [API]``  
+> Take in parameter your API key then set it in config.json.  
+> It return your API_key, the name of your entity and your project selected.  
+> ![init_return](screenshots/init.png)
+
+---
+
 ``!wand init [entity] [project]``  
 > Take in parameter your entity and project name then set them in config.json.  
 > It return your API_key, the name of your entity and your project selected.  
