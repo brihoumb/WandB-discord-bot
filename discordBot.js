@@ -43,10 +43,11 @@ const print_usage = (message) => {
 const wand_login = (message) => {
     const args = message.content.substring(prefix.length + "login ".length).split(' ');
     if (args[0] !== '' && args[0] !== undefined) {
+        API = args[0];
         const config = {
             "token": token,
             "prefix": prefix,
-            "API": args[0],
+            "API": API,
             "entity": entity,
             "project": project,
             "runID": runID
@@ -59,13 +60,12 @@ const wand_login = (message) => {
             };
         });
     };
-    console.log(`API: ${API}`);
     exec(`wandb login ${API}`, (err, stdout) => {
         if (err) {
             console.error(err);
             message.channel.send('An error has occurred.');
         } else {
-            message.channel.send(stdout);
+            message.channel.send(`wandb logged correcly with ${API}`);
         };
     });
     return;
