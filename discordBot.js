@@ -12,6 +12,8 @@ client.on('message', message => {
     try {
         if (message.content.startsWith(`${prefix}ping`)) {
             message.channel.send('Pong.');
+        } else if (message.content.startsWith(`${prefix}login `) || message.content === `${prefix}login`) {
+            wand_login(message);
         } else if (message.content.startsWith(`${prefix}init `) || message.content === `${prefix}init`) {
             wand_init(message);
         } else if (message.content.startsWith(`${prefix}project list `) || message.content === `${prefix}project list`) {
@@ -41,11 +43,10 @@ const print_usage = (message) => {
 const wand_login = (message) => {
     const args = message.content.substring(prefix.length + "login ".length).split(' ');
     if (args[0] !== '' && args[0] !== undefined) {
-        key = args[0];
         const config = {
             "token": token,
             "prefix": prefix,
-            "API": key,
+            "API": args[0],
             "entity": entity,
             "project": project,
             "runID": runID
