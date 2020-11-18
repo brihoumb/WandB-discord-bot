@@ -24,7 +24,7 @@ Then run `npm start` to start the bot.
 ``!wand login [API]``  
 > Take in parameter your API key then set it in config.json.  
 > It return your API_key, the name of your entity and your project selected.  
-> ![init_return](screenshots/init.png)
+> ![login_return](screenshots/login.png)
 
 ---
 
